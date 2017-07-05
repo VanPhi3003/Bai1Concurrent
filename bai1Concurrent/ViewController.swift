@@ -19,7 +19,47 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func btn1(_ sender: Any) {
+        let thread1 = DispatchQueue(label: "thread1", qos: .userInteractive)
+        let thread2 = DispatchQueue(label: "thread2", qos: .userInteractive)
+        let thread3 = DispatchQueue(label: "thread3", qos: .userInteractive)
+        thread1.async {
+            for i in 0...9 {
+                print("🔴 \(i)")
+            }
+        }
+        thread2.async {
+            for i in 100...109 {
+                print("🔵 \(i)")
+            }
+        }
+        thread3.async {
+            
+            for i in 1000...1009 {
+                print("⚫️ \(i)")
+            }
+        }
+    }
+    @IBAction func btn2(_ sender: Any) {
+        let queue = DispatchQueue(label: "myQueue", qos: .utility, attributes: .concurrent)
+        queue.async {
+            for i in 0...9 {
+                print("🔴 \(i)")
+            }
+        }
+        queue.async {
+            for i in 100...109 {
+                print("🔵 \(i)")
+            }
+        }
+        queue.async {
+            for i in 1000...1009 {
+                print("⚫️ \(i)")
 
-
+            }
+        }
+        
+    }
 }
 
